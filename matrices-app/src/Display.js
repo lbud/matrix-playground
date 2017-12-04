@@ -54,18 +54,7 @@ class Display extends Component {
       mat4.perspective(persp, Math.PI / 4, 1, -1, 1);
       mat4.multiply(mat, mat, persp);
 
-      for (const transform of this.props.transforms) {
-        switch (transform.type) {
-          case 'translate':
-            mat4.translate(mat, mat, [transform.x, transform.y, transform.z]);
-            break;
-          case 'rotate':
-            mat4.rotate(mat, mat, transform.angle, [transform.x, transform.y, transform.z]);
-            break;
-          default:
-            break;
-        }
-      }
+      for (const transform of this.props.transforms) this.applyTransform(transform, mat);
 
       regl.clear({
         color: [0, 0, 0, 1],
@@ -76,6 +65,22 @@ class Display extends Component {
         matrix: mat,
       });
     });
+  }
+
+  applyTransform(transform, mat) {
+    switch (transform.type) {
+      case 'translate':
+        mat4.translate(mat, mat, [transform.x, transform.y, transform.z]);
+        break;
+      case 'rotate':
+        mat4.rotate(mat, mat, transform.angle, [transform.x, transform.y, transform.z]);
+        break;
+      case 'scale':
+        mat4.scale(mat, mat, [transform.x, transform.y, transform.z]);
+        break;
+      default:
+        break;
+    }
   }
 
   render() {

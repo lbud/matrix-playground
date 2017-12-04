@@ -3,10 +3,11 @@ html, body, #root {
   padding: 0;
   height: 100%;
   font-family: sans-serif;
+  overflow: hidden;
 }
 .sidebar {
   grid-area: sidebar;
-  background: white;
+  background: #bbb;
   display: block;
   height: 100%;
 }
@@ -26,7 +27,19 @@ html, body, #root {
 }
 
 .transformform {
-  background: #888;
+  background: #eee;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+/*.draghandle {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+*/
+fieldset {
+    border: 0px;
 }
 
 .input {
@@ -43,33 +56,4 @@ html, body, #root {
 input {
     width: 30px;
     margin: 2px 4px;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

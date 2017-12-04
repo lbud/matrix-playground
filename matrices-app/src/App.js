@@ -20,10 +20,17 @@ class App extends Component {
           y: 0,
           z: 0,
           angle: 0
+        },
+        {
+          type: 'scale',
+          x: 1,
+          y: 1,
+          z: 1
         }
       ]
     };
     this.transformsUpdated = this.transformsUpdated.bind(this);
+    this.transformsReordered = this.transformsReordered.bind(this);
   }
 
   transformsUpdated(elIndex, whichValue, value) {
@@ -32,11 +39,16 @@ class App extends Component {
     this.setState(newState);
   }
 
+  transformsReordered(reordered) {
+    this.setState({transforms: reordered});
+  }
+
   render() {
     return (
       <div className='wrapper'>
         <Sidebar className='sidebar'
           transforms={this.state.transforms}
+          onReorderTransforms={this.transformsReordered}
           onUpdateTransforms={this.transformsUpdated} />
         <Display className='display'
           transforms={this.state.transforms} />

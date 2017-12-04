@@ -3149,6 +3149,10 @@ inquirer@3.3.0, inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
+interactjs@^1.2.8:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.2.9.tgz#ae5a3e5bc4b174b7fe2a432df9ef4ef9cbacbdb6"
+
 internal-ip@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-1.2.0.tgz#ae9fbf93b984878785d50a8de1b356956058cf5c"
@@ -5130,9 +5134,20 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-drag-sortable@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-drag-sortable/-/react-drag-sortable-1.0.5.tgz#3a107d4bfc1099682630d1756522346477861eeb"
+  dependencies:
+    interactjs "^1.2.8"
+    lodash "^4.17.4"
+
 react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
+
+react-numeric-input@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-numeric-input/-/react-numeric-input-2.2.0.tgz#5f4f1ce99b32960a9ededa43670a5da225aef850"
 
 react-scripts@1.0.17:
   version "1.0.17"

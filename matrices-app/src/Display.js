@@ -50,9 +50,7 @@ class Display extends Component {
     regl.frame(() => {
       const mat = mat4.create();
 
-      const persp = mat4.create();
-      mat4.perspective(persp, Math.PI / 4, 1, -1, 1);
-      mat4.multiply(mat, mat, persp);
+      // mat4.perspective(mat, Math.PI / 4, 1, -1, 1);
 
       for (const transform of this.props.transforms) this.applyTransform(transform, mat);
 
@@ -77,6 +75,9 @@ class Display extends Component {
         break;
       case 'scale':
         mat4.scale(mat, mat, [transform.x, transform.y, transform.z]);
+        break;
+      case 'perspective':
+        mat4.perspective(mat, transform.fovy, transform.aspect, transform.near, transform.far);
         break;
       default:
         break;

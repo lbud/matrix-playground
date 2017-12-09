@@ -2,35 +2,24 @@ import React, { Component } from 'react';
 import Sidebar from './Sidebar';
 import Display from './Display';
 import './style.css';
+import initial from './init.json';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      transforms: [
-        {
-          type: 'translate',
-          x: 0,
-          y: 0,
-          z: -4
-        },
-        {
-          type: 'rotate',
-          x: 0,
-          y: 0,
-          z: 0,
-          angle: 0
-        },
-        {
-          type: 'scale',
-          x: 1,
-          y: 1,
-          z: 1
-        }
-      ]
+      transforms: initial
     };
     this.transformsUpdated = this.transformsUpdated.bind(this);
     this.transformsReordered = this.transformsReordered.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    // const newState = Object.assign({}, this.state);
+    // newState.transforms = initial;
+    // this.setState(newState);
+    // TODO add immutable.js
   }
 
   transformsUpdated(elIndex, whichValue, value) {
@@ -49,7 +38,8 @@ class App extends Component {
         <Sidebar className='sidebar'
           transforms={this.state.transforms}
           onReorderTransforms={this.transformsReordered}
-          onUpdateTransforms={this.transformsUpdated} />
+          onUpdateTransforms={this.transformsUpdated}
+          reset={this.reset} />
         <Display className='display'
           transforms={this.state.transforms} />
       </div>

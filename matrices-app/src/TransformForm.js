@@ -5,11 +5,23 @@ import './style.css';
 class TransformForm extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.saveState = this.saveState.bind(this);
+    this.setChange = this.setChange.bind(this);
   }
 
-  handleChange(which, e) {
-    this.props.onChange(which, e);
+  saveState(which, e) {
+    this.props.onChange(which, this.state[which]);
+  }
+
+  setChange(which, e) {
+    let temporary = [];
+    temporary[which] = e;
+    this.setState(temporary);
+    console.log(this.props, this.state);
+  }
+
+  useProperty(which) {
+    return this.state && this.state.hasOwnProperty(which) ? this.state[which] : this.props.transform[which];
   }
 
   render() {
@@ -17,16 +29,15 @@ class TransformForm extends Component {
       <div className='transformform flex'>
         <fieldset className='flex'>
             <label>{this.props.transform.type}</label>
-            {['x', 'y', 'z', 'angle']
-              .filter(k => typeof this.props.transform[k] !== 'undefined')
+            {this.props.transform.forms
               .map((k, i) => (
                 <label key={i}>{k}
                 <NumericInput
                   key={i}
-                  value={this.props.transform[k]}
+                  value={this.useProperty(k)}
                   step={0.1}
-                  onChange={this.handleChange.bind(this, k)}
-                  style={false} />
+                  onChange={this.props.onChange.bind(this, k)}
+                  onBlur={this.saveState.bind(this, k)} />
                 </label>
               ))}
         </fieldset>

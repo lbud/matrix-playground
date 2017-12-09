@@ -29,6 +29,8 @@ class Sidebar extends Component {
           })}
           onSort={this.handleStop}
           type='vertical' />
+        <button
+          onClick={this.props.reset}>Reset</button>
       </div>
     );
   }

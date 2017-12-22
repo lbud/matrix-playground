@@ -4,3 +4,6 @@ npm-debug.log
 *.sublime-*
 .DS_Store
 .eslintcache
+bundle.js
+yarn.lock
+yarn-error.log

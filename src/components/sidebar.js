@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DragSortableList from 'react-drag-sortable';
-import TransformForm from './TransformForm';
-import './style.css';
+import TransformForm from './transform_form';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -10,27 +9,28 @@ class Sidebar extends Component {
   }
 
   handleStop(list) {
-    console.log(list.map(l => l.content.props.transform))
-    this.props.onReorderTransforms(list.map(l => l.content.props.transform));
+    this.props.reorder(list.map(l => l.content.props.transform));
   }
 
   render() {
-    console.log(this.props.transforms)
+    const transforms = this.props.state.get('transforms');
+    const { mutateTransform, reset } = this.props;
     return (
       <div className='sidebar'>
         <DragSortableList
-          items={this.props.transforms.map((t, i) => {
-            console.log(t)
+          items={transforms.map((t, i) => {
             return { content: (
               <TransformForm
                 transform={t}
-                onChange={this.props.onUpdateTransforms.bind(this, i)} />
+                k={i}
+                onChange={mutateTransform}
+              />
             )};
-          })}
+          }).toJS()}
           onSort={this.handleStop}
           type='vertical' />
         <button
-          onClick={this.props.reset}>Reset</button>
+          onClick={reset}>Reset</button>
       </div>
     );
   }

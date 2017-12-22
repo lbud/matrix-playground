@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './style.css';
 import instantiateRegl from 'regl';
 import { mat4 } from 'gl-matrix';
-import data from './data.json';
+import data from '../data/geometry.json';
 
 let regl;
 
@@ -48,11 +47,10 @@ class Display extends Component {
     });
 
     regl.frame(() => {
+      const {transforms} = this.props;
       const mat = mat4.create();
 
-      // mat4.perspective(mat, Math.PI / 4, 1, -1, 1);
-
-      for (const transform of this.props.transforms) this.applyTransform(transform, mat);
+      for (const transform of transforms.values()) this.applyTransform(transform.toJSON(), mat);
 
       regl.clear({
         color: [0, 0, 0, 1],

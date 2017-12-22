@@ -27,6 +27,9 @@ export default function reducer(rootState = initialState, action) {
     case 'RESET':
       return rootState
         .set('transforms', fromJS(transforms));
+    case 'REMOVE':
+      return rootState
+        .deleteIn(['transforms', action.payload]);
     default:
       return rootState;
   }

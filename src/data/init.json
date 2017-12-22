@@ -1,18 +1,5 @@
 [
   {
-    "type": "perspective",
-    "fovy": 0.7853981633974483,
-    "aspect": 1,
-    "near": -1,
-    "far": 1,
-    "forms": [
-      "fovy",
-      "aspect",
-      "near",
-      "far"
-    ]
-  },
-  {
     "type": "translate",
     "x": 0,
     "y": 0,

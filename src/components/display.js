@@ -50,6 +50,8 @@ class Display extends Component {
       const {transforms} = this.props;
       const mat = mat4.create();
 
+      this.applyTransform({type: 'perspective', fovy: Math.PI / 4, aspect: 1, near: -1, far: 1}, mat);
+
       for (const transform of transforms.values()) this.applyTransform(transform.toJSON(), mat);
 
       regl.clear({

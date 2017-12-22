@@ -14,7 +14,7 @@ class Sidebar extends Component {
 
   render() {
     const transforms = this.props.state.get('transforms');
-    const { mutateTransform, reset } = this.props;
+    const { mutateTransform, reset, removeTransform } = this.props;
     return (
       <div className='sidebar'>
         <DragSortableList
@@ -24,6 +24,7 @@ class Sidebar extends Component {
                 transform={t}
                 k={i}
                 onChange={mutateTransform}
+                removeTransform={removeTransform}
               />
             )};
           }).toJS()}

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from './app';
-import { addTransform, mutateTransform, reorder, reset } from './actions';
+import { addTransform, mutateTransform, reorder, reset, removeTransform } from './actions';
 
 export default connect(
   state => ({ state }),
@@ -9,5 +9,6 @@ export default connect(
     mutateTransform: (n, transform) => dispatch(mutateTransform(n, transform)),
     reorder: newOrder => dispatch(reorder(newOrder)),
     reset: () => dispatch(reset()),
+    removeTransform: (which) => dispatch(removeTransform(which)),
   }),
 )(App);

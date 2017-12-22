@@ -27,3 +27,10 @@ export function reset() {
     type: 'RESET',
   };
 }
+
+export function removeTransform(which) {
+  return {
+    type: 'REMOVE',
+    payload: which
+  };
+}

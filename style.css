@@ -32,12 +32,13 @@ html, body, #app {
   margin: 5px;
 }
 
-/*.draghandle {
-    display: block;
-    width: 20px;
-    height: 20px;
+.x {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  cursor: pointer;
 }
-*/
+
 fieldset {
     border: 0px;
 }

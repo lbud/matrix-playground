@@ -33,5 +33,24 @@
       "y",
       "z"
     ]
+  },
+  "multiplyScalar": {
+    "type": "multiplyScalar",
+    "s": 1,
+    "forms": [
+      "s"
+    ]
+  },
+  "ortho": {
+    "type": "ortho",
+    "l": -1,
+    "r": 1,
+    "b": -1,
+    "t": 1,
+    "n": 0,
+    "f": 1,
+    "forms": [
+      "l", "r", "b", "t", "n", "f"
+    ]
   }
 }

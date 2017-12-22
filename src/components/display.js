@@ -68,17 +68,19 @@ class Display extends Component {
   applyTransform(transform, mat) {
     switch (transform.type) {
       case 'translate':
-        mat4.translate(mat, mat, [transform.x, transform.y, transform.z]);
-        break;
+        return mat4.translate(mat, mat, [transform.x, transform.y, transform.z]);
       case 'rotate':
-        mat4.rotate(mat, mat, transform.angle, [transform.x, transform.y, transform.z]);
-        break;
+        return mat4.rotate(mat, mat, transform.angle, [transform.x, transform.y, transform.z]);
       case 'scale':
-        mat4.scale(mat, mat, [transform.x, transform.y, transform.z]);
-        break;
+        return mat4.scale(mat, mat, [transform.x, transform.y, transform.z]);
       case 'perspective':
-        mat4.perspective(mat, transform.fovy, transform.aspect, transform.near, transform.far);
-        break;
+        return mat4.perspective(mat, transform.fovy, transform.aspect, transform.near, transform.far);
+      case 'invert':    // currently disabled
+        return mat4.invert(mat, mat);
+      case 'multiplyScalar':
+        return mat4.multiplyScalar(mat, mat, transform.s);
+      case 'ortho':     // currently disabled
+        return mat4.ortho(mat, transform.l, transform.r, transform.b, transform.t, transform.n, transform.f);
       default:
         break;
     }

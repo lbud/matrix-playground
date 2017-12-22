@@ -1,18 +1,5 @@
-[
-  {
-    "type": "perspective",
-    "fovy": 0,
-    "aspect": 1,
-    "near": -1,
-    "far": 1,
-    "forms": [
-      "fovy",
-      "aspect",
-      "near",
-      "far"
-    ]
-  },
-  {
+{
+  "translate": {
     "type": "translate",
     "x": 0,
     "y": 0,
@@ -23,7 +10,7 @@
       "z"
     ]
   },
-  {
+  "rotate": {
     "type": "rotate",
     "x": 0,
     "y": 0,
@@ -36,7 +23,7 @@
       "angle"
     ]
   },
-  {
+  "scale": {
     "type": "scale",
     "x": 1,
     "y": 1,
@@ -47,4 +34,4 @@
       "z"
     ]
   }
-]
+}

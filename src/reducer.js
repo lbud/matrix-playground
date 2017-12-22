@@ -13,7 +13,7 @@ export default function reducer(rootState = initialState, action) {
       return rootState
         .updateIn(
           ['transforms'],
-          list => list.push(TransformConfig.get(action.payload)),
+          list => list.push(fromJS(TransformConfig.get(action.payload))),
         );
     case 'MUTATE_TRANSFORM':
       return rootState

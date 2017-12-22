@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NumericInput from 'react-numeric-input';
 
-NumericInput.style.input.width = '40px';
+NumericInput.style.input.width = '60px';
 
 class TransformForm extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class TransformForm extends Component {
     const { transform, k, removeTransform } = this.props;
     return (
       <div className='transformform flex'>
-        <fieldset className='flex form'>
+        <fieldset className='flex form pure-form'>
             <label>{transform.get('type')}</label>
             {transform.get('forms')
               .map((j, i) => (
@@ -31,9 +31,9 @@ class TransformForm extends Component {
                 </label>
               ))}
         </fieldset>
-        <div className='x'
+        <a className='x pure-button'
           onClick={removeTransform.bind(this, k)}>x
-        </div>
+        </a>
       </div>
     );
   }

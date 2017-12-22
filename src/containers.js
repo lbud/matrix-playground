@@ -9,6 +9,6 @@ export default connect(
     mutateTransform: (n, transform) => dispatch(mutateTransform(n, transform)),
     reorder: newOrder => dispatch(reorder(newOrder)),
     reset: () => dispatch(reset()),
-    removeTransform: (which) => dispatch(removeTransform(which)),
+    removeTransform: which => dispatch(removeTransform(which)),
   }),
 )(App);

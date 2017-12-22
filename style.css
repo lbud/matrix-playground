@@ -30,6 +30,14 @@ html, body, #app {
   background: #eee;
   border-radius: 5px;
   margin: 5px;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+.transformform:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
 
 .x {
@@ -40,7 +48,7 @@ html, body, #app {
 }
 
 fieldset {
-    border: 0px;
+    border: 0px !important;
 }
 
 .input {

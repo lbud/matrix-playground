@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import instantiateRegl from 'regl';
+import { Map } from 'immutable';
+import diff from 'immutablediff';
 import { mat4 } from 'gl-matrix';
 import data from '../data/geometry.json';
+
+const DEFAULT_TRANSITION = 200;
 
 let regl;
 
@@ -9,6 +13,21 @@ class Display extends Component {
   componentDidMount() {
     regl = instantiateRegl(this.node);
     this.startDraw();
+    this.state = {transitions: Map({})};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const propsDiff = diff(this.props.transforms, nextProps.transforms).toJS();
+    const transitions = this.state.transitions;
+    if (propsDiff.length && propsDiff[0].op === 'replace') {
+      const updated = propsDiff[0].path.split('/')[1];
+      this.setState({
+        transitions: transitions.set(updated, {
+          time: Date.now(),
+          transform: this.props.transforms.get(parseInt(updated))
+        })
+      });
+    }
   }
 
   startDraw() {
@@ -47,7 +66,24 @@ class Display extends Component {
     });
 
     regl.frame(() => {
-      const {transforms} = this.props;
+      const now = Date.now();
+
+      const relevantTransitions = this.state.transitions.filterNot((v, k) => v.time + DEFAULT_TRANSITION < now);
+
+      const transforms = this.props.transforms.map((t, i) => {
+        const strI = i.toString();
+        if (relevantTransitions.has(strI)) {
+          const start = relevantTransitions.get(strI);
+          const n = (now - start.time) / DEFAULT_TRANSITION;
+          return t.map((v, k) => {
+            if (k === 'type' || k === 'forms') return v;
+            const s = start.transform.get(k);
+            return s + (v - s) * n;
+          });
+        }
+        return t;
+      });
+
       const mat = mat4.create();
 
       this.applyTransform({type: 'perspective', fovy: Math.PI / 4, aspect: 1, near: -1, far: 1}, mat);
@@ -62,6 +98,8 @@ class Display extends Component {
       draw({
         matrix: mat,
       });
+
+      if (relevantTransitions !== this.state.transitions) this.setState({transitions: relevantTransitions});
     });
   }
 
@@ -79,7 +117,7 @@ class Display extends Component {
         return mat4.invert(mat, mat);
       case 'multiplyScalar':
         return mat4.multiplyScalar(mat, mat, transform.s);
-      case 'ortho':     // currently disabled
+      case 'ortho':     // should disable
         return mat4.ortho(mat, transform.l, transform.r, transform.b, transform.t, transform.n, transform.f);
       default:
         break;
@@ -88,8 +126,7 @@ class Display extends Component {
 
   render() {
     return (
-      <div ref={_node => this.node = _node} className='display'>
-      </div>
+      <div ref={_node => this.node = _node} className='display'></div>
     );
   }
 }

@@ -13,5 +13,6 @@ module.exports = {
         query: { presets: [ 'es2015', 'react' ] }
       }
     ]
-  }
+  },
+  devtool: 'cheap-eval-source-map'
 };

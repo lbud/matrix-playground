@@ -28,6 +28,7 @@
     "budo": "^10.0.4",
     "gl-matrix": "^2.4.0",
     "immutable": "^3.8.2",
+    "immutablediff": "^0.4.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-drag-sortable": "^1.0.5",

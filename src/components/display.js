@@ -4,7 +4,8 @@ import { Map } from 'immutable';
 import diff from 'immutablediff';
 import { mat4 } from 'gl-matrix';
 import data from '../data/geometry.json';
-
+import lineGenerator from '../data/gridlines';
+const gridlines = lineGenerator(500);
 
 import bunny from 'bunny';
 
@@ -72,6 +73,31 @@ class Display extends Component {
       }
     });
 
+    const drawGrid = regl({
+      frag: `
+      precision mediump float;
+      void main() {
+        gl_FragColor = vec4(0.4);
+      }
+      `,
+      vert: `
+      precision mediump float;
+      uniform mat4 matrix;
+      attribute vec2 position;
+      void main() {
+        gl_Position = matrix * vec4(position, 0, 1);
+      }
+      `,
+      attributes: {
+        position: gridlines.position,
+      },
+      elements: gridlines.elements,
+      primitive: 'lines',
+      uniforms: {
+        matrix: regl.prop('matrix'),
+      }
+    });
+
     regl.frame(() => {
       const now = Date.now();
 
@@ -102,6 +128,9 @@ class Display extends Component {
       });
 
       draw({
+        matrix: mat,
+      });
+      drawGrid({
         matrix: mat,
       });
 

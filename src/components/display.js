@@ -5,6 +5,10 @@ import diff from 'immutablediff';
 import { mat4 } from 'gl-matrix';
 import data from '../data/geometry.json';
 
+
+import bunny from 'bunny';
+
+
 const DEFAULT_TRANSITION = 200;
 
 let regl;
@@ -52,12 +56,15 @@ class Display extends Component {
       }`,
 
       attributes: {
-        position: data.position,
+        // position: data.position,
+        position: bunny.positions,
       },
 
-      elements: data.elements,
+      // elements: data.elements,
+      elements: bunny.cells,
 
-      primitive: 'lines',
+      // primitive: 'lines',
+      primitive: 'triangles',
 
       uniforms: {
         color: [1, 0, 0, 1],
@@ -87,8 +94,7 @@ class Display extends Component {
       const mat = mat4.create();
 
       this.applyTransform({type: 'perspective', fovy: Math.PI / 4, aspect: 1, near: -1, far: 1}, mat);
-
-      for (const transform of transforms.values()) this.applyTransform(transform.toJSON(), mat);
+      for (const transform of transforms.reverse().values()) this.applyTransform(transform.toJSON(), mat);
 
       regl.clear({
         color: [0, 0, 0, 1],

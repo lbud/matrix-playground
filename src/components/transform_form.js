@@ -26,7 +26,7 @@ class TransformForm extends Component {
                 <NumericInput
                   key={i}
                   value={transform.get(j)}
-                  step={0.1}
+                  step={0.5}
                   onChange={this.onInput.bind(this, [k, j])} />
                 </label>
               ))}
